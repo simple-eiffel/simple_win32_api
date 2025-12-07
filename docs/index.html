@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>simple_win32_api - Unified Win32 API Library for Eiffel</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/png" href="images/logo.png">
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="images/logo.png" alt="simple_* logo" class="logo">
+        </div>
+        <h1>simple_win32_api</h1>
+        <p class="tagline">Unified Win32 API Library for Eiffel Projects</p>
+        <div class="badges">
+            <span class="badge badge-rfc">Aggregator Library</span>
+            <span class="badge badge-version">v1.0.0</span>
+            <span class="badge badge-license">MIT</span>
+        </div>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#overview">Overview</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#installation">Installation</a></li>
+            <li><a href="#usage">Usage</a></li>
+            <li><a href="#api">API Reference</a></li>
+            <li><a href="https://github.com/ljr1981/simple_win32_api">GitHub</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section id="overview">
+            <h2>Overview</h2>
+            <p>
+                <strong>simple_win32_api</strong> is a unified facade that bundles all Win32 wrapper
+                libraries for SCOOP-compatible Windows programming in Eiffel. Instead of managing
+                multiple library dependencies, use a single WIN32_API class that provides access to:
+            </p>
+            <ul>
+                <li>Process execution and output capture</li>
+                <li>Environment variables (get, set, expand)</li>
+                <li>System information (CPU, memory, OS, directories)</li>
+                <li>Console manipulation (colors, cursor, screen ops)</li>
+                <li>Clipboard access (text read/write)</li>
+                <li>Windows Registry (strings, DWORDs, keys)</li>
+                <li>Memory-mapped files for shared memory</li>
+                <li>Named pipes for inter-process communication</li>
+                <li>File system change monitoring</li>
+            </ul>
+        </section>
+
+        <section id="features">
+            <h2>Features</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>Process</h4>
+                    <p>Execute commands and capture output with exit codes</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Environment</h4>
+                    <p>Get, set, check, and expand environment variables</p>
+                </div>
+                <div class="feature-card">
+                    <h4>System</h4>
+                    <p>Query CPU count, memory, OS version, directories</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Console</h4>
+                    <p>Colors, cursor control, screen clearing, titles</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Clipboard</h4>
+                    <p>Read and write text to the system clipboard</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Registry</h4>
+                    <p>Read and write Windows Registry values</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Memory-Mapped</h4>
+                    <p>Shared memory between processes via mmap</p>
+                </div>
+                <div class="feature-card">
+                    <h4>IPC</h4>
+                    <p>Named pipes for inter-process communication</p>
+                </div>
+                <div class="feature-card">
+                    <h4>File Watcher</h4>
+                    <p>Monitor directories for file system changes</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="installation">
+            <h2>Installation</h2>
+            <p>Add simple_win32_api to your ECF configuration file:</p>
+            <pre><code>&lt;library name="simple_win32_api"
+        location="$SIMPLE_WIN32_API\simple_win32_api.ecf"/&gt;</code></pre>
+
+            <h3>Environment Variables</h3>
+            <p>Set the following environment variables:</p>
+            <pre><code>SIMPLE_WIN32_API=path/to/simple_win32_api
+SIMPLE_PROCESS=path/to/simple_process
+SIMPLE_ENV=path/to/simple_env
+SIMPLE_SYSTEM=path/to/simple_system
+SIMPLE_CONSOLE=path/to/simple_console
+SIMPLE_CLIPBOARD=path/to/simple_clipboard
+SIMPLE_REGISTRY=path/to/simple_registry
+SIMPLE_MMAP=path/to/simple_mmap
+SIMPLE_IPC=path/to/simple_ipc
+SIMPLE_WATCHER=path/to/simple_watcher</code></pre>
+        </section>
+
+        <section id="usage">
+            <h2>Quick Start</h2>
+            <div class="quick-start">
+                <pre><code><span class="keyword">local</span>
+    api: <span class="type">WIN32_API</span>
+<span class="keyword">do</span>
+    <span class="keyword">create</span> api.<span class="feature">make</span>
+
+    <span class="comment">-- Execute commands</span>
+    <span class="keyword">print</span> (api.<span class="feature">execute_command</span> (<span class="string">"dir"</span>))
+
+    <span class="comment">-- Environment variables</span>
+    <span class="keyword">if</span> <span class="keyword">attached</span> api.<span class="feature">get_env</span> (<span class="string">"PATH"</span>) <span class="keyword">as</span> path <span class="keyword">then</span>
+        <span class="keyword">print</span> (path)
+    <span class="keyword">end</span>
+
+    <span class="comment">-- System information</span>
+    <span class="keyword">print</span> (<span class="string">"Computer: "</span> + api.<span class="feature">computer_name</span> + <span class="string">"%N"</span>)
+    <span class="keyword">print</span> (<span class="string">"CPUs: "</span> + api.<span class="feature">processor_count</span>.out + <span class="string">"%N"</span>)
+    <span class="keyword">print</span> (<span class="string">"RAM: "</span> + api.<span class="feature">total_memory_gb</span>.out + <span class="string">" GB%N"</span>)
+
+    <span class="comment">-- Console colors</span>
+    api.<span class="feature">print_colored</span> (<span class="string">"Error: "</span>, api.<span class="feature">Red</span>)
+
+    <span class="comment">-- Clipboard</span>
+    api.<span class="feature">set_clipboard_text</span> (<span class="string">"Hello from Eiffel!"</span>)
+
+    <span class="comment">-- Registry</span>
+    <span class="keyword">if</span> <span class="keyword">attached</span> api.<span class="feature">registry_read_string</span> (api.<span class="feature">HKLM</span>,
+        <span class="string">"SOFTWARE\Microsoft\Windows NT\CurrentVersion"</span>,
+        <span class="string">"ProductName"</span>) <span class="keyword">as</span> product
+    <span class="keyword">then</span>
+        <span class="keyword">print</span> (<span class="string">"OS: "</span> + product + <span class="string">"%N"</span>)
+    <span class="keyword">end</span>
+<span class="keyword">end</span></code></pre>
+            </div>
+        </section>
+
+        <section id="api">
+            <h2>API Reference</h2>
+
+            <div class="api-section">
+                <h3>Process Execution</h3>
+                <div class="signature">execute_command (a_command: STRING): STRING_32</div>
+                <div class="signature">execute_command_with_exit_code (a_command: STRING): TUPLE [output, exit_code, success]</div>
+                <div class="signature">last_exit_code: INTEGER</div>
+            </div>
+
+            <div class="api-section">
+                <h3>Environment Variables</h3>
+                <div class="signature">get_env (a_name: STRING): detachable STRING_32</div>
+                <div class="signature">set_env (a_name, a_value: STRING)</div>
+                <div class="signature">has_env (a_name: STRING): BOOLEAN</div>
+                <div class="signature">expand_env (a_string: STRING): STRING_32</div>
+            </div>
+
+            <div class="api-section">
+                <h3>System Information</h3>
+                <div class="signature">computer_name, user_name: STRING_32</div>
+                <div class="signature">processor_count: INTEGER</div>
+                <div class="signature">processor_architecture: STRING_32</div>
+                <div class="signature">is_64_bit: BOOLEAN</div>
+                <div class="signature">total_memory_mb, available_memory_mb: INTEGER</div>
+                <div class="signature">total_memory_gb, available_memory_gb: REAL_64</div>
+                <div class="signature">windows_directory, system_directory, temp_directory: STRING_32</div>
+                <div class="signature">os_version_string: STRING_32</div>
+                <div class="signature">is_windows_11: BOOLEAN</div>
+            </div>
+
+            <div class="api-section">
+                <h3>Console Manipulation</h3>
+                <div class="signature">print_colored (a_text: STRING; a_color: INTEGER)</div>
+                <div class="signature">print_at (a_text: STRING; a_x, a_y: INTEGER)</div>
+                <div class="signature">set_console_title (a_title: STRING)</div>
+                <div class="signature">clear_console</div>
+                <div class="signature">set_cursor_position (a_x, a_y: INTEGER)</div>
+                <div class="signature">console_width, console_height: INTEGER</div>
+                <div class="signature">Black, Red, Green, Blue, Yellow, White: INTEGER (color constants)</div>
+            </div>
+
+            <div class="api-section">
+                <h3>Clipboard Access</h3>
+                <div class="signature">clipboard_text: detachable STRING_32</div>
+                <div class="signature">set_clipboard_text (a_text: STRING)</div>
+                <div class="signature">clear_clipboard</div>
+                <div class="signature">clipboard_has_text: BOOLEAN</div>
+            </div>
+
+            <div class="api-section">
+                <h3>Registry Access</h3>
+                <div class="signature">registry_read_string (a_hkey: POINTER; a_subkey, a_name: STRING): detachable STRING_32</div>
+                <div class="signature">registry_write_string (a_hkey: POINTER; a_subkey, a_name, a_value: STRING)</div>
+                <div class="signature">registry_read_dword (a_hkey: POINTER; a_subkey, a_name: STRING): INTEGER</div>
+                <div class="signature">registry_write_dword (a_hkey: POINTER; a_subkey, a_name: STRING; a_value: INTEGER)</div>
+                <div class="signature">registry_key_exists (a_hkey: POINTER; a_subkey: STRING): BOOLEAN</div>
+                <div class="signature">registry_value_exists (a_hkey: POINTER; a_subkey, a_name: STRING): BOOLEAN</div>
+                <div class="signature">HKLM, HKCU, HKCR, HKU: POINTER (root keys)</div>
+            </div>
+
+            <div class="api-section">
+                <h3>Factory Methods</h3>
+                <div class="signature">new_mmap (a_name: STRING; a_size: INTEGER): SIMPLE_MMAP</div>
+                <div class="signature">open_mmap (a_name: STRING): SIMPLE_MMAP</div>
+                <div class="signature">new_pipe_server (a_name: STRING): SIMPLE_IPC_SERVER</div>
+                <div class="signature">new_pipe_client (a_name: STRING): SIMPLE_IPC_CLIENT</div>
+                <div class="signature">new_watcher (a_path: STRING; a_recursive: BOOLEAN; a_flags: INTEGER): SIMPLE_WATCHER</div>
+                <div class="signature">new_watcher_all (a_path: STRING; a_recursive: BOOLEAN): SIMPLE_WATCHER</div>
+            </div>
+
+            <div class="api-section">
+                <h3>Direct Access</h3>
+                <div class="signature">process: SIMPLE_PROCESS</div>
+                <div class="signature">env: SIMPLE_ENV</div>
+                <div class="signature">system: SIMPLE_SYSTEM</div>
+                <div class="signature">console: SIMPLE_CONSOLE</div>
+                <div class="signature">clipboard: SIMPLE_CLIPBOARD</div>
+                <div class="signature">registry: SIMPLE_REGISTRY</div>
+            </div>
+        </section>
+
+        <section id="dependencies">
+            <h2>Dependencies</h2>
+            <p>simple_win32_api bundles the following libraries:</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Library</th>
+                        <th>Purpose</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>simple_process</code></td>
+                        <td>Shell command execution and output capture</td>
+                    </tr>
+                    <tr>
+                        <td><code>simple_env</code></td>
+                        <td>Environment variable access</td>
+                    </tr>
+                    <tr>
+                        <td><code>simple_system</code></td>
+                        <td>System information (CPU, memory, OS)</td>
+                    </tr>
+                    <tr>
+                        <td><code>simple_console</code></td>
+                        <td>Console colors and cursor control</td>
+                    </tr>
+                    <tr>
+                        <td><code>simple_clipboard</code></td>
+                        <td>Clipboard text access</td>
+                    </tr>
+                    <tr>
+                        <td><code>simple_registry</code></td>
+                        <td>Windows Registry operations</td>
+                    </tr>
+                    <tr>
+                        <td><code>simple_mmap</code></td>
+                        <td>Memory-mapped files for shared memory</td>
+                    </tr>
+                    <tr>
+                        <td><code>simple_ipc</code></td>
+                        <td>Named pipes for IPC</td>
+                    </tr>
+                    <tr>
+                        <td><code>simple_watcher</code></td>
+                        <td>File system change monitoring</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <footer>
+        <p>simple_win32_api is part of the <a href="https://github.com/ljr1981">simple_*</a> library collection.</p>
+        <p class="copyright">&copy; 2024-2025 Larry Rix. MIT License.</p>
+    </footer>
+</body>
+</html>
