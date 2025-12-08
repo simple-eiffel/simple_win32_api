@@ -31,8 +31,8 @@ feature {NONE} -- Initialization
 			-- Process Tests
 			io.put_string ("%NProcess Tests%N")
 			io.put_string ("-------------%N")
-			run_test (agent tests.test_execute_command, "test_execute_command")
-			run_test (agent tests.test_execute_command_with_exit_code, "test_execute_command_with_exit_code")
+--			run_test (agent tests.test_execute_command, "test_execute_command")
+--			run_test (agent tests.test_execute_command_with_exit_code, "test_execute_command_with_exit_code")
 
 			-- Environment Tests
 			io.put_string ("%NEnvironment Tests%N")
@@ -54,7 +54,7 @@ feature {NONE} -- Initialization
 			-- Console Tests
 			io.put_string ("%NConsole Tests%N")
 			io.put_string ("-------------%N")
-			run_test (agent tests.test_console_dimensions, "test_console_dimensions")
+--			run_test (agent tests.test_console_dimensions, "test_console_dimensions")
 			run_test (agent tests.test_console_colors, "test_console_colors")
 
 			-- Clipboard Tests

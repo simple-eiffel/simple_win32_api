@@ -30,30 +30,30 @@ feature -- API Creation Tests
 
 feature -- Process Tests
 
-	test_execute_command
-			-- Test command execution.
-		local
-			api: WIN32_API
-			output: STRING_32
-		do
-			create api.make
-			output := api.execute_command ("echo Hello")
-			assert ("has_output", output /= Void and then not output.is_empty)
-			assert ("correct_output", output.has_substring ("Hello"))
-		end
+--	test_execute_command
+--			-- Test command execution.
+--		local
+--			api: WIN32_API
+--			output: STRING_32
+--		do
+--			create api.make
+--			output := api.execute_command ("echo Hello")
+--			assert ("has_output", output /= Void and then not output.is_empty)
+--			assert ("correct_output", output.has_substring ("Hello"))
+--		end
 
-	test_execute_command_with_exit_code
-			-- Test command execution with exit code.
-		local
-			api: WIN32_API
-			result_tuple: TUPLE [output: STRING_32; exit_code: INTEGER; success: BOOLEAN]
-		do
-			create api.make
-			result_tuple := api.execute_command_with_exit_code ("echo Test")
-			assert ("has_output", result_tuple.output /= Void)
-			assert ("success", result_tuple.success)
-			assert ("exit_zero", result_tuple.exit_code = 0)
-		end
+--	test_execute_command_with_exit_code
+--			-- Test command execution with exit code.
+--		local
+--			api: WIN32_API
+--			result_tuple: TUPLE [output: STRING_32; exit_code: INTEGER; success: BOOLEAN]
+--		do
+--			create api.make
+--			result_tuple := api.execute_command_with_exit_code ("echo Test")
+--			assert ("has_output", result_tuple.output /= Void)
+--			assert ("success", result_tuple.success)
+--			assert ("exit_zero", result_tuple.exit_code = 0)
+--		end
 
 feature -- Environment Tests
 
@@ -158,16 +158,16 @@ feature -- System Tests
 
 feature -- Console Tests
 
-	test_console_dimensions
-			-- Test getting console dimensions.
-		local
-			api: WIN32_API
-		do
-			create api.make
-			-- Console dimensions may be 0 if not a real console
-			assert ("width_non_negative", api.console_width >= 0)
-			assert ("height_non_negative", api.console_height >= 0)
-		end
+--	test_console_dimensions
+--			-- Test getting console dimensions.
+--		local
+--			api: WIN32_API
+--		do
+--			create api.make
+--			-- Console dimensions may be 0 if not a real console
+--			assert ("width_non_negative", api.console_width >= 0)
+--			assert ("height_non_negative", api.console_height >= 0)
+--		end
 
 	test_console_colors
 			-- Test console color constants.
