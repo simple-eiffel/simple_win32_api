@@ -4,7 +4,7 @@
 
 **Unified Win32 API Library for Eiffel Projects**
 
-[Documentation](https://ljr1981.github.io/simple_win32_api/) | [GitHub](https://github.com/ljr1981/simple_win32_api)
+[Documentation](https://simple-eiffel.github.io/simple_win32_api/) | [GitHub](https://github.com/simple-eiffel/simple_win32_api)
 
 ## Overview
 
@@ -28,15 +28,15 @@ This library bundles the following simple_* libraries:
 
 | Library | Purpose | Environment Variable |
 |---------|---------|---------------------|
-| [simple_process](https://github.com/ljr1981/simple_process) | Process execution | `$SIMPLE_PROCESS` |
-| [simple_env](https://github.com/ljr1981/simple_env) | Environment variables | `$SIMPLE_ENV` |
-| [simple_system](https://github.com/ljr1981/simple_system) | System information | `$SIMPLE_SYSTEM` |
-| [simple_console](https://github.com/ljr1981/simple_console) | Console manipulation | `$SIMPLE_CONSOLE` |
-| [simple_clipboard](https://github.com/ljr1981/simple_clipboard) | Clipboard access | `$SIMPLE_CLIPBOARD` |
-| [simple_registry](https://github.com/ljr1981/simple_registry) | Windows Registry | `$SIMPLE_REGISTRY` |
-| [simple_mmap](https://github.com/ljr1981/simple_mmap) | Memory-mapped files | `$SIMPLE_MMAP` |
-| [simple_ipc](https://github.com/ljr1981/simple_ipc) | Named pipes IPC | `$SIMPLE_IPC` |
-| [simple_watcher](https://github.com/ljr1981/simple_watcher) | File system monitoring | `$SIMPLE_WATCHER` |
+| [simple_process](https://github.com/simple-eiffel/simple_process) | Process execution | `$SIMPLE_PROCESS` |
+| [simple_env](https://github.com/simple-eiffel/simple_env) | Environment variables | `$SIMPLE_ENV` |
+| [simple_system](https://github.com/simple-eiffel/simple_system) | System information | `$SIMPLE_SYSTEM` |
+| [simple_console](https://github.com/simple-eiffel/simple_console) | Console manipulation | `$SIMPLE_CONSOLE` |
+| [simple_clipboard](https://github.com/simple-eiffel/simple_clipboard) | Clipboard access | `$SIMPLE_CLIPBOARD` |
+| [simple_registry](https://github.com/simple-eiffel/simple_registry) | Windows Registry | `$SIMPLE_REGISTRY` |
+| [simple_mmap](https://github.com/simple-eiffel/simple_mmap) | Memory-mapped files | `$SIMPLE_MMAP` |
+| [simple_ipc](https://github.com/simple-eiffel/simple_ipc) | Named pipes IPC | `$SIMPLE_IPC` |
+| [simple_watcher](https://github.com/simple-eiffel/simple_watcher) | File system monitoring | `$SIMPLE_WATCHER` |
 
 ## Installation
 
