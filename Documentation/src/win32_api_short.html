@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="generator" content="ISE EiffelStudio version 25.02.9.8732 - win64">
+<meta name="description" content="TTUnified API facade for Win32 operations with SCOOP compatibility.  TTProvides single entry point to: TT- Process execution (simple_process) TT- Environment variables (simple_env) TT- System information (simple_system) TT- Console manipulation (simple_console) TT- Clipboard access (simple_clipboard) TT- Windows Registry (simple_registry) TT- Memory-mapped files (simple_mmap) TT- Named pipes IPC (simple_ipc) TT- File system watching (simple_watcher)  TTUsage: TTTcreate api.make TTTapi.execute_command (dir) TTTapi.get_env (PATH) TTTapi.computer_name TTTapi.print_colored (Error, {WIN32_API}.Red) TTTapi.set_clipboard_text (Hello) TTTapi.registry_read_string (HKLM, SOFTWARE\\MyApp, Version)"/>
+<meta name="author" content="Larry Rix"/>
+<meta name="keywords" content="Eiffel class"/>
+<meta name="keywords" content="Eiffel class"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet">
+<title>win32_api Contracts</title>
+<link rel="stylesheet" href="../default.css" type="text/css">
+<script type="text/javascript" src="../goto.html"></script>
+</head>
+<body>
+<pre></pre><form class="nav" onsubmit="go_to('../',this.c.value);return false;">
+<div class="nav">
+<a class="nav hierarchy" href="../class_list.html">Classes</a>
+<a class="nav hierarchy" href="../cluster_list.html">Clusters</a>
+<a class="nav hierarchy" href="../cluster_hierarchy.html">Cluster hierarchy</a>
+<a class="nav class" href="win32_api_chart.html">Chart</a>
+<a class="nav class" href="win32_api_links.html">Relations</a>
+<span class="nav class selected">Contracts</span>
+<span class="nav class goto">Go to: <input name="c" value="win32_api"></span>
+</div></form><pre><span class="ekeyword">note</span>
+	<span class="eitag">description</span><span class="esymbol">:</span> <span class="estring">&quot;</span><span class="estring">[</span>
+		<span class="estring">		Unified API facade for Win32 operations with SCOOP compatibility.</span>
+		
+		<span class="estring">		Provides single entry point to:</span>
+		<span class="estring">		- Process execution (simple_process)</span>
+		<span class="estring">		- Environment variables (simple_env)</span>
+		<span class="estring">		- System information (simple_system)</span>
+		<span class="estring">		- Console manipulation (simple_console)</span>
+		<span class="estring">		- Clipboard access (simple_clipboard)</span>
+		<span class="estring">		- Windows Registry (simple_registry)</span>
+		<span class="estring">		- Memory-mapped files (simple_mmap)</span>
+		<span class="estring">		- Named pipes IPC (simple_ipc)</span>
+		<span class="estring">		- File system watching (simple_watcher)</span>
+		
+		<span class="estring">		Usage:</span>
+		<span class="estring">			create api.make</span>
+		<span class="estring">			api.execute_command (&quot;dir&quot;)</span>
+		<span class="estring">			api.get_env (&quot;PATH&quot;)</span>
+		<span class="estring">			api.computer_name</span>
+		<span class="estring">			api.print_colored (&quot;Error&quot;, </span><span class="esymbol">{</span><a class="eclass" href="../src/win32_api_short.html">WIN32_API</a><span class="esymbol">}</span><span class="edot">.</span><a class="efeature" href="../src/win32_api_short.html#f_red">red</a><span class="estring">)</span>
+		<span class="estring">			api.set_clipboard_text (&quot;Hello&quot;)</span>
+		<span class="estring">			api.registry_read_string (HKLM, &quot;SOFTWARE\\MyApp&quot;, &quot;Version&quot;)</span>
+	<span class="estring">]</span><span class="estring">&quot;</span>
+	<span class="eitag">author</span><span class="esymbol">:</span> <span class="estring">&quot;Larry Rix&quot;</span>
+	<span class="eitag">date</span><span class="esymbol">:</span> <span class="estring">&quot;$Date$&quot;</span>
+	<span class="eitag">revision</span><span class="esymbol">:</span> <span class="estring">&quot;$Revision$&quot;</span>
+
+<span class="ekeyword">class</span> <span class="ekeyword">interface</span>
+	<a class="eclass" href="../src/win32_api_short.html">WIN32_API</a>
+
+<span class="ekeyword">create</span> 
+	<a class="efeature" href="../src/win32_api_short.html#f_make">make</a>
+
+<span class="ekeyword">feature</span> <span class="ecomment">--</span><span class="ecomment"> Process Execution</span>
+
+	<a name="f_execute_command"></a><a class="efeature" href="../src/win32_api_short.html#f_execute_command">execute_command</a> <span class="esymbol">(</span><span class="elocal">a_command</span><span class="esymbol">:</span> <a class="eclass" href="../base/readable_string_general_short.html">READABLE_STRING_GENERAL</a><span class="esymbol">)</span><span class="esymbol">:</span> <a class="eclass" href="../base/string_32_short.html">STRING_32</a>
+			<span class="ecomment">--</span><span class="ecomment"> Execute shell </span><span class="equoted">a_command</span><span class="ecomment"> and return output.</span>
+		<span class="ekeyword">require</span>
+			<span class="etag">command_not_empty</span><span class="esymbol">:</span> <a class="ekeyword" href="../base/boolean_short.html#f_negated">not</a> <span class="elocal">a_command</span><span class="edot">.</span><a class="efeature" href="../base/readable_string_general_short.html#f_is_empty">is_empty</a>
+
+	<a name="f_execute_command_with_exit_code"></a><a class="efeature" href="../src/win32_api_short.html#f_execute_command_with_exit_code">execute_command_with_exit_code</a> <span class="esymbol">(</span><span class="elocal">a_command</span><span class="esymbol">:</span> <a class="eclass" href="../base/readable_string_general_short.html">READABLE_STRING_GENERAL</a><span class="esymbol">)</span><span class="esymbol">:</span> <a class="eclass" href="../base/tuple_short.html">TUPLE</a> <span class="esymbol">[</span><span class="elocal">output</span><span class="esymbol">:</span> <a class="eclass" href="../base/string_32_short.html">STRING_32</a><span class="esymbol">;</span> <span class="elocal">exit_code</span><span class="esymbol">:</span> <a class="eclass" href="../base/integer_32_short.html">INTEGER_32</a><span class="esymbol">;</span> <span class="elocal">success</span><span class="esymbol">:</span> <a class="eclass" href="../base/boolean_short.html">BOOLEAN</a><span class="esymbol">]</span>
+			<span class="ecomment">--</span><span class="ecomment"> Execute </span><span class="equoted">a_command</span><span class="ecomment"> and return output, exit code, and success flag.</span>
+		<span class="ekeyword">require</span>
+			<span class="etag">command_not_empty</span><span class="esymbol">:</span> <a class="ekeyword" href="../base/boolean_short.html#f_negated">not</a> <span class="elocal">a_command</span><span class="edot">.</span><a class="efeature" href="../base/readable_string_general_short.html#f_is_empty">is_empty</a>
+
+	<a name="f_last_exit_code"></a><a class="efeature" href="../src/win32_api_short.html#f_last_exit_code">last_exit_code</a><span class="esymbol">:</span> <a class="eclass" href="../base/integer_32_short.html">INTEGER_32</a>
+			<span class="ecomment">--</span><span class="ecomment"> Exit code from last command execution.</span>
+	
+<span class="ekeyword">feature</span> <span class="ecomment">--</span><span class="ecomment"> Environment Variables</span>
+
+	<a name="f_get_env"></a><a class="efeature" href="../src/win32_api_short.html#f_get_env">get_env</a> <span class="esymbol">(</span><span class="elocal">a_name</span><span class="esymbol">:</span> <a class="eclass" href="../base/readable_string_general_short.html">READABLE_STRING_GENERAL</a><span class="esymbol">)</span><span class="esymbol">:</span> <span class="ekeyword">detachable</span> <a class="eclass" href="../base/string_32_short.html">STRING_32</a>
+			<span class="ecomment">--</span><span class="ecomment"> Get environment variable value.</span>
+		<span class="ekeyword">require</span>
+			<span class="etag">name_not_empty</span><span class="esymbol">:</span> <a class="ekeyword" href="../base/boolean_short.html#f_negated">not</a> <span class="elocal">a_name</span><span class="edot">.</span><a class="efeature" href="../base/readable_string_general_short.html#f_is_empty">is_empty</a>
+
+	<a name="f_set_env"></a><a class="efeature" href="../src/win32_api_short.html#f_set_env">set_env</a> <span class="esymbol">(</span><span class="elocal">a_name</span><span class="esymbol">,</span> <span class="elocal">a_value</span><span class="esymbol">:</span> <a class="eclass" href="../base/readable_string_general_short.html">READABLE_STRING_GENERAL</a><span class="esymbol">)</span>
+			<span class="ecomment">--</span><span class="ecomment"> Set environment variable.</span>
+		<span class="ekeyword">require</span>
+			<span class="etag">name_not_empty</span><span class="esymbol">:</span> <a class="ekeyword" href="../base/boolean_short.html#f_negated">not</a> <span class="elocal">a_name</span><span class="edot">.</span><a class="efeature" href="../base/readable_string_general_short.html#f_is_empty">is_empty</a>
+
+	<a name="f_has_env"></a><a class="efeature" href="../src/win32_api_short.html#f_has_env">has_env</a> <span class="esymbol">(</span><span class="elocal">a_name</span><span class="esymbol">:</span> <a class="eclass" href="../base/readable_string_general_short.html">READABLE_STRING_GENERAL</a><span class="esymbol">)</span><span class="esymbol">:</span> <a class="eclass" href="../base/boolean_short.html">BOOLEAN</a>
+			<span class="ecomment">--</span><span class="ecomment"> Does environment variable exist?</span>
+		<span class="ekeyword">require</span>
+			<span class="etag">name_not_empty</span><span class="esymbol">:</span> <a class="ekeyword" href="../base/boolean_short.html#f_negated">not</a> <span class="elocal">a_name</span><span class="edot">.</span><a class="efeature" href="../base/readable_string_general_short.html#f_is_empty">is_empty</a>
+
+	<a name="f_expand_env"></a><a class="efeature" href="../src/win32_api_short.html#f_expand_env">expand_env</a> <span class="esymbol">(</span><span class="elocal">a_string</span><span class="esymbol">:</span> <a class="eclass" href="../base/readable_string_general_short.html">READABLE_STRING_GENERAL</a><span class="esymbol">)</span><span class="esymbol">:</span> <a class="eclass" href="../base/string_32_short.html">STRING_32</a>
+			<span class="ecomment">--</span><span class="ecomment"> Expand %VAR% references in string.</span>
+		<span class="ekeyword">require</span>
+			<span class="etag">string_not_void</span><span class="esymbol">:</span> <span class="elocal">a_string</span> <span class="esymbol">/=</span> <span class="ekeyword">Void</span>
+	
+<span class="ekeyword">feature</span> <span class="ecomment">--</span><span class="ecomment"> System Information</span>
+
+	<a name="f_computer_name"></a><a class="efeature" href="../src/win32_api_short.html#f_computer_name">computer_name</a><span class="esymbol">:</span> <a class="eclass" href="../base/string_32_short.html">STRING_32</a>
+			<span class="ecomment">--</span><span class="ecomment"> Name of the computer.</span>
+
+	<a name="f_user_name"></a><a class="efeature" href="../src/win32_api_short.html#f_user_name">user_name</a><span class="esymbol">:</span> <a class="eclass" href="../base/string_32_short.html">STRING_32</a>
+			<span class="ecomment">--</span><span class="ecomment"> Name of the current user.</span>
+
+	<a name="f_processor_count"></a><a class="efeature" href="../src/win32_api_short.html#f_processor_count">processor_count</a><span class="esymbol">:</span> <a class="eclass" href="../base/integer_32_short.html">INTEGER_32</a>
+			<span class="ecomment">--</span><span class="ecomment"> Number of logical processors.</span>
+
+	<a name="f_processor_architecture"></a><a class="efeature" href="../src/win32_api_short.html#f_processor_architecture">processor_architecture</a><span class="esymbol">:</span> <a class="eclass" href="../base/string_32_short.html">STRING_32</a>
+			<span class="ecomment">--</span><span class="ecomment"> Processor architecture (x86, x64, ARM64).</span>
+
+	<a name="f_is_64_bit"></a><a class="efeature" href="../src/win32_api_short.html#f_is_64_bit">is_64_bit</a><span class="esymbol">:</span> <a class="eclass" href="../base/boolean_short.html">BOOLEAN</a>
+			<span class="ecomment">--</span><span class="ecomment"> Is the processor 64-bit?</span>
+
+	<a name="f_total_memory_mb"></a><a class="efeature" href="../src/win32_api_short.html#f_total_memory_mb">total_memory_mb</a><span class="esymbol">:</span> <a class="eclass" href="../base/natural_64_short.html">NATURAL_64</a>
+			<span class="ecomment">--</span><span class="ecomment"> Total physical memory in megabytes.</span>
+
+	<a name="f_total_memory_gb"></a><a class="efeature" href="../src/win32_api_short.html#f_total_memory_gb">total_memory_gb</a><span class="esymbol">:</span> <a class="eclass" href="../base/real_64_short.html">REAL_64</a>
+			<span class="ecomment">--</span><span class="ecomment"> Total physical memory in gigabytes.</span>
+
+	<a name="f_available_memory_mb"></a><a class="efeature" href="../src/win32_api_short.html#f_available_memory_mb">available_memory_mb</a><span class="esymbol">:</span> <a class="eclass" href="../base/natural_64_short.html">NATURAL_64</a>
+			<span class="ecomment">--</span><span class="ecomment"> Available physical memory in megabytes.</span>
+
+	<a name="f_available_memory_gb"></a><a class="efeature" href="../src/win32_api_short.html#f_available_memory_gb">available_memory_gb</a><span class="esymbol">:</span> <a class="eclass" href="../base/real_64_short.html">REAL_64</a>
+			<span class="ecomment">--</span><span class="ecomment"> Available physical memory in gigabytes.</span>
+
+	<a name="f_windows_directory"></a><a class="efeature" href="../src/win32_api_short.html#f_windows_directory">windows_directory</a><span class="esymbol">:</span> <a class="eclass" href="../base/string_32_short.html">STRING_32</a>
+			<span class="ecomment">--</span><span class="ecomment"> Windows installation directory.</span>
+
+	<a name="f_system_directory"></a><a class="efeature" href="../src/win32_api_short.html#f_system_directory">system_directory</a><span class="esymbol">:</span> <a class="eclass" href="../base/string_32_short.html">STRING_32</a>
+			<span class="ecomment">--</span><span class="ecomment"> System32 directory.</span>
+
+	<a name="f_temp_directory"></a><a class="efeature" href="../src/win32_api_short.html#f_temp_directory">temp_directory</a><span class="esymbol">:</span> <a class="eclass" href="../base/string_32_short.html">STRING_32</a>
+			<span class="ecomment">--</span><span class="ecomment"> Temporary files directory.</span>
+
+	<a name="f_os_version_string"></a><a class="efeature" href="../src/win32_api_short.html#f_os_version_string">os_version_string</a><span class="esymbol">:</span> <a class="eclass" href="../base/string_32_short.html">STRING_32</a>
+			<span class="ecomment">--</span><span class="ecomment"> Full OS version string (e.g., &quot;10.0.22631&quot;).</span>
+
+	<a name="f_is_windows_11"></a><a class="efeature" href="../src/win32_api_short.html#f_is_windows_11">is_windows_11</a><span class="esymbol">:</span> <a class="eclass" href="../base/boolean_short.html">BOOLEAN</a>
+			<span class="ecomment">--</span><span class="ecomment"> Is this Windows 11?</span>
+	
+<span class="ekeyword">feature</span> <span class="ecomment">--</span><span class="ecomment"> Console Manipulation</span>
+
+	<a name="f_print_colored"></a><a class="efeature" href="../src/win32_api_short.html#f_print_colored">print_colored</a> <span class="esymbol">(</span><span class="elocal">a_text</span><span class="esymbol">:</span> <a class="eclass" href="../base/readable_string_general_short.html">READABLE_STRING_GENERAL</a><span class="esymbol">;</span> <span class="elocal">a_color</span><span class="esymbol">:</span> <a class="eclass" href="../base/integer_32_short.html">INTEGER_32</a><span class="esymbol">)</span>
+			<span class="ecomment">--</span><span class="ecomment"> Print text in specified color, then reset.</span>
+		<span class="ekeyword">require</span>
+			<span class="etag">text_not_void</span><span class="esymbol">:</span> <span class="elocal">a_text</span> <span class="esymbol">/=</span> <span class="ekeyword">Void</span>
+			<span class="etag">valid_color</span><span class="esymbol">:</span> <span class="elocal">a_color</span> <a class="esymbol" href="../base/comparable_short.html#f_is_greater_equal">&gt;=</a> <span class="enumber">0</span> <a class="ekeyword" href="../base/boolean_short.html#f_conjuncted">and</a> <span class="elocal">a_color</span> <a class="esymbol" href="../base/comparable_short.html#f_is_less_equal">&lt;=</a> <span class="enumber">15</span>
+
+	<a name="f_print_at"></a><a class="efeature" href="../src/win32_api_short.html#f_print_at">print_at</a> <span class="esymbol">(</span><span class="elocal">a_text</span><span class="esymbol">:</span> <a class="eclass" href="../base/readable_string_general_short.html">READABLE_STRING_GENERAL</a><span class="esymbol">;</span> <span class="elocal">a_x</span><span class="esymbol">,</span> <span class="elocal">a_y</span><span class="esymbol">:</span> <a class="eclass" href="../base/integer_32_short.html">INTEGER_32</a><span class="esymbol">)</span>
+			<span class="ecomment">--</span><span class="ecomment"> Print text at position.</span>
+		<span class="ekeyword">require</span>
+			<span class="etag">text_not_void</span><span class="esymbol">:</span> <span class="elocal">a_text</span> <span class="esymbol">/=</span> <span class="ekeyword">Void</span>
+			<span class="etag">valid_x</span><span class="esymbol">:</span> <span class="elocal">a_x</span> <a class="esymbol" href="../base/comparable_short.html#f_is_greater_equal">&gt;=</a> <span class="enumber">0</span>
+			<span class="etag">valid_y</span><span class="esymbol">:</span> <span class="elocal">a_y</span> <a class="esymbol" href="../base/comparable_short.html#f_is_greater_equal">&gt;=</a> <span class="enumber">0</span>
+
+	<a name="f_set_console_title"></a><a class="efeature" href="../src/win32_api_short.html#f_set_console_title">set_console_title</a> <span class="esymbol">(</span><span class="elocal">a_title</span><span class="esymbol">:</span> <a class="eclass" href="../base/readable_string_general_short.html">READABLE_STRING_GENERAL</a><span class="esymbol">)</span>
+			<span class="ecomment">--</span><span class="ecomment"> Set console window title.</span>
+		<span class="ekeyword">require</span>
+			<span class="etag">title_not_void</span><span class="esymbol">:</span> <span class="elocal">a_title</span> <span class="esymbol">/=</span> <span class="ekeyword">Void</span>
+
+	<a name="f_clear_console"></a><a class="efeature" href="../src/win32_api_short.html#f_clear_console">clear_console</a>
+			<span class="ecomment">--</span><span class="ecomment"> Clear the console screen.</span>
+
+	<a name="f_set_cursor_position"></a><a class="efeature" href="../src/win32_api_short.html#f_set_cursor_position">set_cursor_position</a> <span class="esymbol">(</span><span class="elocal">a_x</span><span class="esymbol">,</span> <span class="elocal">a_y</span><span class="esymbol">:</span> <a class="eclass" href="../base/integer_32_short.html">INTEGER_32</a><span class="esymbol">)</span>
+			<span class="ecomment">--</span><span class="ecomment"> Move cursor to position.</span>
+		<span class="ekeyword">require</span>
+			<span class="etag">valid_x</span><span class="esymbol">:</span> <span class="elocal">a_x</span> <a class="esymbol" href="../base/comparable_short.html#f_is_greater_equal">&gt;=</a> <span class="enumber">0</span>
+			<span class="etag">valid_y</span><span class="esymbol">:</span> <span class="elocal">a_y</span> <a class="esymbol" href="../base/comparable_short.html#f_is_greater_equal">&gt;=</a> <span class="enumber">0</span>
+
+	<a name="f_console_width"></a><a class="efeature" href="../src/win32_api_short.html#f_console_width">console_width</a><span class="esymbol">:</span> <a class="eclass" href="../base/integer_32_short.html">INTEGER_32</a>
+			<span class="ecomment">--</span><span class="ecomment"> Console window width in characters.</span>
+
+	<a name="f_console_height"></a><a class="efeature" href="../src/win32_api_short.html#f_console_height">console_height</a><span class="esymbol">:</span> <a class="eclass" href="../base/integer_32_short.html">INTEGER_32</a>
+			<span class="ecomment">--</span><span class="ecomment"> Console window height in characters.</span>
+	
+<span class="ekeyword">feature</span> <span class="ecomment">--</span><span class="ecomment"> Console Colors</span>
+
+	<a name="f_black"></a><a class="efeature" href="../src/win32_api_short.html#f_black">Black</a><span class="esymbol">:</span> <a class="eclass" href="../base/integer_32_short.html">INTEGER_32</a> <span class="esymbol">=</span> <span class="enumber">0</span>
+
+	<a name="f_dark_blue"></a><a class="efeature" href="../src/win32_api_short.html#f_dark_blue">Dark_blue</a><span class="esymbol">:</span> <a class="eclass" href="../base/integer_32_short.html">INTEGER_32</a> <span class="esymbol">=</span> <span class="enumber">1</span>
+
+	<a name="f_dark_green"></a><a class="efeature" href="../src/win32_api_short.html#f_dark_green">Dark_green</a><span class="esymbol">:</span> <a class="eclass" href="../base/integer_32_short.html">INTEGER_32</a> <span class="esymbol">=</span> <span class="enumber">2</span>
+
+	<a name="f_dark_cyan"></a><a class="efeature" href="../src/win32_api_short.html#f_dark_cyan">Dark_cyan</a><span class="esymbol">:</span> <a class="eclass" href="../base/integer_32_short.html">INTEGER_32</a> <span class="esymbol">=</span> <span class="enumber">3</span>
+
+	<a name="f_dark_red"></a><a class="efeature" href="../src/win32_api_short.html#f_dark_red">Dark_red</a><span class="esymbol">:</span> <a class="eclass" href="../base/integer_32_short.html">INTEGER_32</a> <span class="esymbol">=</span> <span class="enumber">4</span>
+
+	<a name="f_dark_magenta"></a><a class="efeature" href="../src/win32_api_short.html#f_dark_magenta">Dark_magenta</a><span class="esymbol">:</span> <a class="eclass" href="../base/integer_32_short.html">INTEGER_32</a> <span class="esymbol">=</span> <span class="enumber">5</span>
+
+	<a name="f_dark_yellow"></a><a class="efeature" href="../src/win32_api_short.html#f_dark_yellow">Dark_yellow</a><span class="esymbol">:</span> <a class="eclass" href="../base/integer_32_short.html">INTEGER_32</a> <span class="esymbol">=</span> <span class="enumber">6</span>
+
+	<a name="f_gray"></a><a class="efeature" href="../src/win32_api_short.html#f_gray">Gray</a><span class="esymbol">:</span> <a class="eclass" href="../base/integer_32_short.html">INTEGER_32</a> <span class="esymbol">=</span> <span class="enumber">7</span>
+
+	<a name="f_dark_gray"></a><a class="efeature" href="../src/win32_api_short.html#f_dark_gray">Dark_gray</a><span class="esymbol">:</span> <a class="eclass" href="../base/integer_32_short.html">INTEGER_32</a> <span class="esymbol">=</span> <span class="enumber">8</span>
+
+	<a name="f_blue"></a><a class="efeature" href="../src/win32_api_short.html#f_blue">Blue</a><span class="esymbol">:</span> <a class="eclass" href="../base/integer_32_short.html">INTEGER_32</a> <span class="esymbol">=</span> <span class="enumber">9</span>
+
+	<a name="f_green"></a><a class="efeature" href="../src/win32_api_short.html#f_green">Green</a><span class="esymbol">:</span> <a class="eclass" href="../base/integer_32_short.html">INTEGER_32</a> <span class="esymbol">=</span> <span class="enumber">10</span>
+
+	<a name="f_cyan"></a><a class="efeature" href="../src/win32_api_short.html#f_cyan">Cyan</a><span class="esymbol">:</span> <a class="eclass" href="../base/integer_32_short.html">INTEGER_32</a> <span class="esymbol">=</span> <span class="enumber">11</span>
+
+	<a name="f_red"></a><a class="efeature" href="../src/win32_api_short.html#f_red">Red</a><span class="esymbol">:</span> <a class="eclass" href="../base/integer_32_short.html">INTEGER_32</a> <span class="esymbol">=</span> <span class="enumber">12</span>
+
+	<a name="f_magenta"></a><a class="efeature" href="../src/win32_api_short.html#f_magenta">Magenta</a><span class="esymbol">:</span> <a class="eclass" href="../base/integer_32_short.html">INTEGER_32</a> <span class="esymbol">=</span> <span class="enumber">13</span>
+
+	<a name="f_yellow"></a><a class="efeature" href="../src/win32_api_short.html#f_yellow">Yellow</a><span class="esymbol">:</span> <a class="eclass" href="../base/integer_32_short.html">INTEGER_32</a> <span class="esymbol">=</span> <span class="enumber">14</span>
+
+	<a name="f_white"></a><a class="efeature" href="../src/win32_api_short.html#f_white">White</a><span class="esymbol">:</span> <a class="eclass" href="../base/integer_32_short.html">INTEGER_32</a> <span class="esymbol">=</span> <span class="enumber">15</span>
+	
+<span class="ekeyword">feature</span> <span class="ecomment">--</span><span class="ecomment"> Clipboard Access</span>
+
+	<a name="f_clipboard_text"></a><a class="efeature" href="../src/win32_api_short.html#f_clipboard_text">clipboard_text</a><span class="esymbol">:</span> <span class="ekeyword">detachable</span> <a class="eclass" href="../base/string_32_short.html">STRING_32</a>
+			<span class="ecomment">--</span><span class="ecomment"> Get text from clipboard.</span>
+
+	<a name="f_set_clipboard_text"></a><a class="efeature" href="../src/win32_api_short.html#f_set_clipboard_text">set_clipboard_text</a> <span class="esymbol">(</span><span class="elocal">a_text</span><span class="esymbol">:</span> <a class="eclass" href="../base/readable_string_general_short.html">READABLE_STRING_GENERAL</a><span class="esymbol">)</span>
+			<span class="ecomment">--</span><span class="ecomment"> Set clipboard text.</span>
+		<span class="ekeyword">require</span>
+			<span class="etag">text_not_void</span><span class="esymbol">:</span> <span class="elocal">a_text</span> <span class="esymbol">/=</span> <span class="ekeyword">Void</span>
+
+	<a name="f_clear_clipboard"></a><a class="efeature" href="../src/win32_api_short.html#f_clear_clipboard">clear_clipboard</a>
+			<span class="ecomment">--</span><span class="ecomment"> Clear clipboard contents.</span>
+
+	<a name="f_clipboard_has_text"></a><a class="efeature" href="../src/win32_api_short.html#f_clipboard_has_text">clipboard_has_text</a><span class="esymbol">:</span> <a class="eclass" href="../base/boolean_short.html">BOOLEAN</a>
+			<span class="ecomment">--</span><span class="ecomment"> Does clipboard contain text?</span>
+	
+<span class="ekeyword">feature</span> <span class="ecomment">--</span><span class="ecomment"> Registry Access</span>
+
+	<a name="f_registry_read_string"></a><a class="efeature" href="../src/win32_api_short.html#f_registry_read_string">registry_read_string</a> <span class="esymbol">(</span><span class="elocal">a_hkey</span><span class="esymbol">:</span> <a class="eclass" href="../base/pointer_short.html">POINTER</a><span class="esymbol">;</span> <span class="elocal">a_subkey</span><span class="esymbol">,</span> <span class="elocal">a_name</span><span class="esymbol">:</span> <a class="eclass" href="../base/readable_string_general_short.html">READABLE_STRING_GENERAL</a><span class="esymbol">)</span><span class="esymbol">:</span> <span class="ekeyword">detachable</span> <a class="eclass" href="../base/string_32_short.html">STRING_32</a>
+			<span class="ecomment">--</span><span class="ecomment"> Read string value from registry.</span>
+		<span class="ekeyword">require</span>
+			<span class="etag">subkey_not_empty</span><span class="esymbol">:</span> <a class="ekeyword" href="../base/boolean_short.html#f_negated">not</a> <span class="elocal">a_subkey</span><span class="edot">.</span><a class="efeature" href="../base/readable_string_general_short.html#f_is_empty">is_empty</a>
+			<span class="etag">name_not_empty</span><span class="esymbol">:</span> <a class="ekeyword" href="../base/boolean_short.html#f_negated">not</a> <span class="elocal">a_name</span><span class="edot">.</span><a class="efeature" href="../base/readable_string_general_short.html#f_is_empty">is_empty</a>
+
+	<a name="f_registry_write_string"></a><a class="efeature" href="../src/win32_api_short.html#f_registry_write_string">registry_write_string</a> <span class="esymbol">(</span><span class="elocal">a_hkey</span><span class="esymbol">:</span> <a class="eclass" href="../base/pointer_short.html">POINTER</a><span class="esymbol">;</span> <span class="elocal">a_subkey</span><span class="esymbol">,</span> <span class="elocal">a_name</span><span class="esymbol">,</span> <span class="elocal">a_value</span><span class="esymbol">:</span> <a class="eclass" href="../base/readable_string_general_short.html">READABLE_STRING_GENERAL</a><span class="esymbol">)</span>
+			<span class="ecomment">--</span><span class="ecomment"> Write string value to registry.</span>
+		<span class="ekeyword">require</span>
+			<span class="etag">subkey_not_empty</span><span class="esymbol">:</span> <a class="ekeyword" href="../base/boolean_short.html#f_negated">not</a> <span class="elocal">a_subkey</span><span class="edot">.</span><a class="efeature" href="../base/readable_string_general_short.html#f_is_empty">is_empty</a>
+			<span class="etag">name_not_empty</span><span class="esymbol">:</span> <a class="ekeyword" href="../base/boolean_short.html#f_negated">not</a> <span class="elocal">a_name</span><span class="edot">.</span><a class="efeature" href="../base/readable_string_general_short.html#f_is_empty">is_empty</a>
+
+	<a name="f_registry_read_dword"></a><a class="efeature" href="../src/win32_api_short.html#f_registry_read_dword">registry_read_dword</a> <span class="esymbol">(</span><span class="elocal">a_hkey</span><span class="esymbol">:</span> <a class="eclass" href="../base/pointer_short.html">POINTER</a><span class="esymbol">;</span> <span class="elocal">a_subkey</span><span class="esymbol">,</span> <span class="elocal">a_name</span><span class="esymbol">:</span> <a class="eclass" href="../base/readable_string_general_short.html">READABLE_STRING_GENERAL</a><span class="esymbol">)</span><span class="esymbol">:</span> <a class="eclass" href="../base/integer_32_short.html">INTEGER_32</a>
+			<span class="ecomment">--</span><span class="ecomment"> Read DWORD value from registry.</span>
+		<span class="ekeyword">require</span>
+			<span class="etag">subkey_not_empty</span><span class="esymbol">:</span> <a class="ekeyword" href="../base/boolean_short.html#f_negated">not</a> <span class="elocal">a_subkey</span><span class="edot">.</span><a class="efeature" href="../base/readable_string_general_short.html#f_is_empty">is_empty</a>
+			<span class="etag">name_not_empty</span><span class="esymbol">:</span> <a class="ekeyword" href="../base/boolean_short.html#f_negated">not</a> <span class="elocal">a_name</span><span class="edot">.</span><a class="efeature" href="../base/readable_string_general_short.html#f_is_empty">is_empty</a>
+
+	<a name="f_registry_write_dword"></a><a class="efeature" href="../src/win32_api_short.html#f_registry_write_dword">registry_write_dword</a> <span class="esymbol">(</span><span class="elocal">a_hkey</span><span class="esymbol">:</span> <a class="eclass" href="../base/pointer_short.html">POINTER</a><span class="esymbol">;</span> <span class="elocal">a_subkey</span><span class="esymbol">,</span> <span class="elocal">a_name</span><span class="esymbol">:</span> <a class="eclass" href="../base/readable_string_general_short.html">READABLE_STRING_GENERAL</a><span class="esymbol">;</span> <span class="elocal">a_value</span><span class="esymbol">:</span> <a class="eclass" href="../base/integer_32_short.html">INTEGER_32</a><span class="esymbol">)</span>
+			<span class="ecomment">--</span><span class="ecomment"> Write DWORD value to registry.</span>
+		<span class="ekeyword">require</span>
+			<span class="etag">subkey_not_empty</span><span class="esymbol">:</span> <a class="ekeyword" href="../base/boolean_short.html#f_negated">not</a> <span class="elocal">a_subkey</span><span class="edot">.</span><a class="efeature" href="../base/readable_string_general_short.html#f_is_empty">is_empty</a>
+			<span class="etag">name_not_empty</span><span class="esymbol">:</span> <a class="ekeyword" href="../base/boolean_short.html#f_negated">not</a> <span class="elocal">a_name</span><span class="edot">.</span><a class="efeature" href="../base/readable_string_general_short.html#f_is_empty">is_empty</a>
+
+	<a name="f_registry_key_exists"></a><a class="efeature" href="../src/win32_api_short.html#f_registry_key_exists">registry_key_exists</a> <span class="esymbol">(</span><span class="elocal">a_hkey</span><span class="esymbol">:</span> <a class="eclass" href="../base/pointer_short.html">POINTER</a><span class="esymbol">;</span> <span class="elocal">a_subkey</span><span class="esymbol">:</span> <a class="eclass" href="../base/readable_string_general_short.html">READABLE_STRING_GENERAL</a><span class="esymbol">)</span><span class="esymbol">:</span> <a class="eclass" href="../base/boolean_short.html">BOOLEAN</a>
+			<span class="ecomment">--</span><span class="ecomment"> Does registry key exist?</span>
+		<span class="ekeyword">require</span>
+			<span class="etag">subkey_not_empty</span><span class="esymbol">:</span> <a class="ekeyword" href="../base/boolean_short.html#f_negated">not</a> <span class="elocal">a_subkey</span><span class="edot">.</span><a class="efeature" href="../base/readable_string_general_short.html#f_is_empty">is_empty</a>
+
+	<a name="f_registry_value_exists"></a><a class="efeature" href="../src/win32_api_short.html#f_registry_value_exists">registry_value_exists</a> <span class="esymbol">(</span><span class="elocal">a_hkey</span><span class="esymbol">:</span> <a class="eclass" href="../base/pointer_short.html">POINTER</a><span class="esymbol">;</span> <span class="elocal">a_subkey</span><span class="esymbol">,</span> <span class="elocal">a_name</span><span class="esymbol">:</span> <a class="eclass" href="../base/readable_string_general_short.html">READABLE_STRING_GENERAL</a><span class="esymbol">)</span><span class="esymbol">:</span> <a class="eclass" href="../base/boolean_short.html">BOOLEAN</a>
+			<span class="ecomment">--</span><span class="ecomment"> Does registry value exist?</span>
+		<span class="ekeyword">require</span>
+			<span class="etag">subkey_not_empty</span><span class="esymbol">:</span> <a class="ekeyword" href="../base/boolean_short.html#f_negated">not</a> <span class="elocal">a_subkey</span><span class="edot">.</span><a class="efeature" href="../base/readable_string_general_short.html#f_is_empty">is_empty</a>
+			<span class="etag">name_not_empty</span><span class="esymbol">:</span> <a class="ekeyword" href="../base/boolean_short.html#f_negated">not</a> <span class="elocal">a_name</span><span class="edot">.</span><a class="efeature" href="../base/readable_string_general_short.html#f_is_empty">is_empty</a>
+	
+<span class="ekeyword">feature</span> <span class="ecomment">--</span><span class="ecomment"> Registry Root Keys</span>
+
+	<a name="f_hkey_classes_root"></a><a class="efeature" href="../src/win32_api_short.html#f_hkey_classes_root">hkey_classes_root</a><span class="esymbol">:</span> <a class="eclass" href="../base/pointer_short.html">POINTER</a>
+
+	<a name="f_hkey_current_user"></a><a class="efeature" href="../src/win32_api_short.html#f_hkey_current_user">hkey_current_user</a><span class="esymbol">:</span> <a class="eclass" href="../base/pointer_short.html">POINTER</a>
+
+	<a name="f_hkey_local_machine"></a><a class="efeature" href="../src/win32_api_short.html#f_hkey_local_machine">hkey_local_machine</a><span class="esymbol">:</span> <a class="eclass" href="../base/pointer_short.html">POINTER</a>
+
+	<a name="f_hkey_users"></a><a class="efeature" href="../src/win32_api_short.html#f_hkey_users">hkey_users</a><span class="esymbol">:</span> <a class="eclass" href="../base/pointer_short.html">POINTER</a>
+
+	<a name="f_hkcr"></a><a class="efeature" href="../src/win32_api_short.html#f_hkcr">hkcr</a><span class="esymbol">:</span> <a class="eclass" href="../base/pointer_short.html">POINTER</a>
+
+	<a name="f_hkcu"></a><a class="efeature" href="../src/win32_api_short.html#f_hkcu">hkcu</a><span class="esymbol">:</span> <a class="eclass" href="../base/pointer_short.html">POINTER</a>
+
+	<a name="f_hklm"></a><a class="efeature" href="../src/win32_api_short.html#f_hklm">hklm</a><span class="esymbol">:</span> <a class="eclass" href="../base/pointer_short.html">POINTER</a>
+
+	<a name="f_hku"></a><a class="efeature" href="../src/win32_api_short.html#f_hku">hku</a><span class="esymbol">:</span> <a class="eclass" href="../base/pointer_short.html">POINTER</a>
+	
+<span class="ekeyword">feature</span> <span class="ecomment">--</span><span class="ecomment"> Factory: Memory-Mapped Files</span>
+
+	<a name="f_new_mmap"></a><a class="efeature" href="../src/win32_api_short.html#f_new_mmap">new_mmap</a> <span class="esymbol">(</span><span class="elocal">a_name</span><span class="esymbol">:</span> <a class="eclass" href="../base/readable_string_general_short.html">READABLE_STRING_GENERAL</a><span class="esymbol">;</span> <span class="elocal">a_size</span><span class="esymbol">:</span> <a class="eclass" href="../base/integer_32_short.html">INTEGER_32</a><span class="esymbol">)</span><span class="esymbol">:</span> <a class="eclass" href="../simple_mmap/simple_mmap_short.html">SIMPLE_MMAP</a>
+			<span class="ecomment">--</span><span class="ecomment"> Create a new shared memory-mapped region.</span>
+		<span class="ekeyword">require</span>
+			<span class="etag">name_not_empty</span><span class="esymbol">:</span> <a class="ekeyword" href="../base/boolean_short.html#f_negated">not</a> <span class="elocal">a_name</span><span class="edot">.</span><a class="efeature" href="../base/readable_string_general_short.html#f_is_empty">is_empty</a>
+			<span class="etag">valid_size</span><span class="esymbol">:</span> <span class="elocal">a_size</span> <a class="esymbol" href="../base/comparable_short.html#f_is_greater">&gt;</a> <span class="enumber">0</span>
+		<span class="ekeyword">ensure</span>
+			<span class="etag">created</span><span class="esymbol">:</span> <span class="ekeyword">Result</span> <span class="esymbol">/=</span> <span class="ekeyword">Void</span>
+
+	<a name="f_open_mmap"></a><a class="efeature" href="../src/win32_api_short.html#f_open_mmap">open_mmap</a> <span class="esymbol">(</span><span class="elocal">a_name</span><span class="esymbol">:</span> <a class="eclass" href="../base/readable_string_general_short.html">READABLE_STRING_GENERAL</a><span class="esymbol">)</span><span class="esymbol">:</span> <a class="eclass" href="../simple_mmap/simple_mmap_short.html">SIMPLE_MMAP</a>
+			<span class="ecomment">--</span><span class="ecomment"> Open an existing shared memory-mapped region.</span>
+		<span class="ekeyword">require</span>
+			<span class="etag">name_not_empty</span><span class="esymbol">:</span> <a class="ekeyword" href="../base/boolean_short.html#f_negated">not</a> <span class="elocal">a_name</span><span class="edot">.</span><a class="efeature" href="../base/readable_string_general_short.html#f_is_empty">is_empty</a>
+		<span class="ekeyword">ensure</span>
+			<span class="etag">created</span><span class="esymbol">:</span> <span class="ekeyword">Result</span> <span class="esymbol">/=</span> <span class="ekeyword">Void</span>
+	
+<span class="ekeyword">feature</span> <span class="ecomment">--</span><span class="ecomment"> Factory: IPC (Named Pipes)</span>
+
+	<a name="f_new_pipe_server"></a><a class="efeature" href="../src/win32_api_short.html#f_new_pipe_server">new_pipe_server</a> <span class="esymbol">(</span><span class="elocal">a_name</span><span class="esymbol">:</span> <a class="eclass" href="../base/readable_string_general_short.html">READABLE_STRING_GENERAL</a><span class="esymbol">)</span><span class="esymbol">:</span> <a class="eclass" href="../simple_ipc/simple_ipc_short.html">SIMPLE_IPC</a>
+			<span class="ecomment">--</span><span class="ecomment"> Create a new named pipe server.</span>
+		<span class="ekeyword">require</span>
+			<span class="etag">name_not_empty</span><span class="esymbol">:</span> <a class="ekeyword" href="../base/boolean_short.html#f_negated">not</a> <span class="elocal">a_name</span><span class="edot">.</span><a class="efeature" href="../base/readable_string_general_short.html#f_is_empty">is_empty</a>
+		<span class="ekeyword">ensure</span>
+			<span class="etag">created</span><span class="esymbol">:</span> <span class="ekeyword">Result</span> <span class="esymbol">/=</span> <span class="ekeyword">Void</span>
+
+	<a name="f_new_pipe_client"></a><a class="efeature" href="../src/win32_api_short.html#f_new_pipe_client">new_pipe_client</a> <span class="esymbol">(</span><span class="elocal">a_name</span><span class="esymbol">:</span> <a class="eclass" href="../base/readable_string_general_short.html">READABLE_STRING_GENERAL</a><span class="esymbol">)</span><span class="esymbol">:</span> <a class="eclass" href="../simple_ipc/simple_ipc_short.html">SIMPLE_IPC</a>
+			<span class="ecomment">--</span><span class="ecomment"> Create a new named pipe client.</span>
+		<span class="ekeyword">require</span>
+			<span class="etag">name_not_empty</span><span class="esymbol">:</span> <a class="ekeyword" href="../base/boolean_short.html#f_negated">not</a> <span class="elocal">a_name</span><span class="edot">.</span><a class="efeature" href="../base/readable_string_general_short.html#f_is_empty">is_empty</a>
+		<span class="ekeyword">ensure</span>
+			<span class="etag">created</span><span class="esymbol">:</span> <span class="ekeyword">Result</span> <span class="esymbol">/=</span> <span class="ekeyword">Void</span>
+	
+<span class="ekeyword">feature</span> <span class="ecomment">--</span><span class="ecomment"> Factory: File System Watcher</span>
+
+	<a name="f_new_watcher"></a><a class="efeature" href="../src/win32_api_short.html#f_new_watcher">new_watcher</a> <span class="esymbol">(</span><span class="elocal">a_path</span><span class="esymbol">:</span> <a class="eclass" href="../base/readable_string_general_short.html">READABLE_STRING_GENERAL</a><span class="esymbol">;</span> <span class="elocal">a_recursive</span><span class="esymbol">:</span> <a class="eclass" href="../base/boolean_short.html">BOOLEAN</a><span class="esymbol">;</span> <span class="elocal">a_flags</span><span class="esymbol">:</span> <a class="eclass" href="../base/integer_32_short.html">INTEGER_32</a><span class="esymbol">)</span><span class="esymbol">:</span> <a class="eclass" href="../simple_watcher/simple_watcher_short.html">SIMPLE_WATCHER</a>
+			<span class="ecomment">--</span><span class="ecomment"> Create a new file system watcher.</span>
+		<span class="ekeyword">require</span>
+			<span class="etag">path_not_empty</span><span class="esymbol">:</span> <a class="ekeyword" href="../base/boolean_short.html#f_negated">not</a> <span class="elocal">a_path</span><span class="edot">.</span><a class="efeature" href="../base/readable_string_general_short.html#f_is_empty">is_empty</a>
+		<span class="ekeyword">ensure</span>
+			<span class="etag">created</span><span class="esymbol">:</span> <span class="ekeyword">Result</span> <span class="esymbol">/=</span> <span class="ekeyword">Void</span>
+
+	<a name="f_new_watcher_all"></a><a class="efeature" href="../src/win32_api_short.html#f_new_watcher_all">new_watcher_all</a> <span class="esymbol">(</span><span class="elocal">a_path</span><span class="esymbol">:</span> <a class="eclass" href="../base/readable_string_general_short.html">READABLE_STRING_GENERAL</a><span class="esymbol">;</span> <span class="elocal">a_recursive</span><span class="esymbol">:</span> <a class="eclass" href="../base/boolean_short.html">BOOLEAN</a><span class="esymbol">)</span><span class="esymbol">:</span> <a class="eclass" href="../simple_watcher/simple_watcher_short.html">SIMPLE_WATCHER</a>
+			<span class="ecomment">--</span><span class="ecomment"> Create a new file system watcher monitoring all change types.</span>
+		<span class="ekeyword">require</span>
+			<span class="etag">path_not_empty</span><span class="esymbol">:</span> <a class="ekeyword" href="../base/boolean_short.html#f_negated">not</a> <span class="elocal">a_path</span><span class="edot">.</span><a class="efeature" href="../base/readable_string_general_short.html#f_is_empty">is_empty</a>
+		<span class="ekeyword">ensure</span>
+			<span class="etag">created</span><span class="esymbol">:</span> <span class="ekeyword">Result</span> <span class="esymbol">/=</span> <span class="ekeyword">Void</span>
+	
+<span class="ekeyword">feature</span> <span class="ecomment">--</span><span class="ecomment"> Watch Flags</span>
+
+	<a name="f_watch_file_name"></a><a class="efeature" href="../src/win32_api_short.html#f_watch_file_name">Watch_file_name</a><span class="esymbol">:</span> <a class="eclass" href="../base/integer_32_short.html">INTEGER_32</a> <span class="esymbol">=</span> <span class="enumber">1</span>
+
+	<a name="f_watch_dir_name"></a><a class="efeature" href="../src/win32_api_short.html#f_watch_dir_name">Watch_dir_name</a><span class="esymbol">:</span> <a class="eclass" href="../base/integer_32_short.html">INTEGER_32</a> <span class="esymbol">=</span> <span class="enumber">2</span>
+
+	<a name="f_watch_attributes"></a><a class="efeature" href="../src/win32_api_short.html#f_watch_attributes">Watch_attributes</a><span class="esymbol">:</span> <a class="eclass" href="../base/integer_32_short.html">INTEGER_32</a> <span class="esymbol">=</span> <span class="enumber">4</span>
+
+	<a name="f_watch_size"></a><a class="efeature" href="../src/win32_api_short.html#f_watch_size">Watch_size</a><span class="esymbol">:</span> <a class="eclass" href="../base/integer_32_short.html">INTEGER_32</a> <span class="esymbol">=</span> <span class="enumber">8</span>
+
+	<a name="f_watch_last_write"></a><a class="efeature" href="../src/win32_api_short.html#f_watch_last_write">Watch_last_write</a><span class="esymbol">:</span> <a class="eclass" href="../base/integer_32_short.html">INTEGER_32</a> <span class="esymbol">=</span> <span class="enumber">16</span>
+
+	<a name="f_watch_security"></a><a class="efeature" href="../src/win32_api_short.html#f_watch_security">Watch_security</a><span class="esymbol">:</span> <a class="eclass" href="../base/integer_32_short.html">INTEGER_32</a> <span class="esymbol">=</span> <span class="enumber">32</span>
+
+	<a name="f_watch_all"></a><a class="efeature" href="../src/win32_api_short.html#f_watch_all">Watch_all</a><span class="esymbol">:</span> <a class="eclass" href="../base/integer_32_short.html">INTEGER_32</a> <span class="esymbol">=</span> <span class="enumber">63</span>
+	
+<span class="ekeyword">feature</span> <span class="ecomment">--</span><span class="ecomment"> Direct Access</span>
+
+	<a name="f_process"></a><a class="efeature" href="../src/win32_api_short.html#f_process">process</a><span class="esymbol">:</span> <a class="eclass" href="../simple_process/simple_process_short.html">SIMPLE_PROCESS</a>
+			<span class="ecomment">--</span><span class="ecomment"> Direct access to process executor.</span>
+
+	<a name="f_env"></a><a class="efeature" href="../src/win32_api_short.html#f_env">env</a><span class="esymbol">:</span> <a class="eclass" href="../simple_env/simple_env_short.html">SIMPLE_ENV</a>
+			<span class="ecomment">--</span><span class="ecomment"> Direct access to environment accessor.</span>
+
+	<a name="f_system"></a><a class="efeature" href="../src/win32_api_short.html#f_system">system</a><span class="esymbol">:</span> <a class="eclass" href="../simple_system/simple_system_short.html">SIMPLE_SYSTEM</a>
+			<span class="ecomment">--</span><span class="ecomment"> Direct access to system information.</span>
+
+	<a name="f_console"></a><a class="efeature" href="../src/win32_api_short.html#f_console">console</a><span class="esymbol">:</span> <a class="eclass" href="../simple_console/simple_console_short.html">SIMPLE_CONSOLE</a>
+			<span class="ecomment">--</span><span class="ecomment"> Direct access to console manipulator.</span>
+
+	<a name="f_clipboard"></a><a class="efeature" href="../src/win32_api_short.html#f_clipboard">clipboard</a><span class="esymbol">:</span> <a class="eclass" href="../simple_clipboard/simple_clipboard_short.html">SIMPLE_CLIPBOARD</a>
+			<span class="ecomment">--</span><span class="ecomment"> Direct access to clipboard accessor.</span>
+
+	<a name="f_registry"></a><a class="efeature" href="../src/win32_api_short.html#f_registry">registry</a><span class="esymbol">:</span> <a class="eclass" href="../simple_registry/simple_registry_short.html">SIMPLE_REGISTRY</a>
+			<span class="ecomment">--</span><span class="ecomment"> Direct access to registry accessor.</span>
+	
+<span class="ekeyword">invariant</span>
+	<span class="etag">process_exists</span><span class="esymbol">:</span> <a class="efeature" href="../src/win32_api_short.html#f_process_executor">process_executor</a> <span class="esymbol">/=</span> <span class="ekeyword">Void</span>
+	<span class="etag">env_exists</span><span class="esymbol">:</span> <a class="efeature" href="../src/win32_api_short.html#f_env_accessor">env_accessor</a> <span class="esymbol">/=</span> <span class="ekeyword">Void</span>
+	<span class="etag">system_exists</span><span class="esymbol">:</span> <a class="efeature" href="../src/win32_api_short.html#f_system_info">system_info</a> <span class="esymbol">/=</span> <span class="ekeyword">Void</span>
+	<span class="etag">console_exists</span><span class="esymbol">:</span> <a class="efeature" href="../src/win32_api_short.html#f_console_manipulator">console_manipulator</a> <span class="esymbol">/=</span> <span class="ekeyword">Void</span>
+	<span class="etag">clipboard_exists</span><span class="esymbol">:</span> <a class="efeature" href="../src/win32_api_short.html#f_clipboard_accessor">clipboard_accessor</a> <span class="esymbol">/=</span> <span class="ekeyword">Void</span>
+	<span class="etag">registry_exists</span><span class="esymbol">:</span> <a class="efeature" href="../src/win32_api_short.html#f_registry_accessor">registry_accessor</a> <span class="esymbol">/=</span> <span class="ekeyword">Void</span>
+
+<span class="ekeyword">end</span> <span class="ecomment">--</span> <span class="ecomment">class </span><a class="eclass" href="../src/win32_api_short.html">WIN32_API</a></pre><form class="nav" onsubmit="go_to('../',this.c.value);return false;">
+<div class="nav">
+<a class="nav hierarchy" href="../class_list.html">Classes</a>
+<a class="nav hierarchy" href="../cluster_list.html">Clusters</a>
+<a class="nav hierarchy" href="../cluster_hierarchy.html">Cluster hierarchy</a>
+<a class="nav class" href="win32_api_chart.html">Chart</a>
+<a class="nav class" href="win32_api_links.html">Relations</a>
+<span class="nav class selected">Contracts</span>
+<span class="nav class goto">Go to: <input name="c" value="win32_api"></span>
+</div></form><pre></pre>
+<p style="text-align:center;">Generated by <a href="http://www.eiffel.com">ISE EiffelStudio</a></p>
+</body>
+</html>
+

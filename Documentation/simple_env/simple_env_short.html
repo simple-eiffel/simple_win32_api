@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="generator" content="ISE EiffelStudio version 25.02.9.8732 - win64">
+<meta name="description" content="SCOOP-compatible environment variable access. Uses direct Win32 API calls via C wrapper."/>
+<meta name="author" content="Larry Rix"/>
+<meta name="keywords" content="Eiffel class"/>
+<meta name="keywords" content="Eiffel class"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet">
+<title>simple_env Contracts</title>
+<link rel="stylesheet" href="../default.css" type="text/css">
+<script type="text/javascript" src="../goto.html"></script>
+</head>
+<body>
+<pre></pre><form class="nav" onsubmit="go_to('../',this.c.value);return false;">
+<div class="nav">
+<a class="nav hierarchy" href="../class_list.html">Classes</a>
+<a class="nav hierarchy" href="../cluster_list.html">Clusters</a>
+<a class="nav hierarchy" href="../cluster_hierarchy.html">Cluster hierarchy</a>
+<a class="nav class" href="simple_env_chart.html">Chart</a>
+<a class="nav class" href="simple_env_links.html">Relations</a>
+<span class="nav class selected">Contracts</span>
+<span class="nav class goto">Go to: <input name="c" value="simple_env"></span>
+</div></form><pre><span class="ekeyword">note</span>
+	<span class="eitag">description</span><span class="esymbol">:</span> <span class="estring">&quot;</span><span class="estring">[</span>
+		<span class="estring">SCOOP-compatible environment variable access.</span>
+		<span class="estring">Uses direct Win32 API calls via C wrapper.</span>
+	<span class="estring">]</span><span class="estring">&quot;</span>
+	<span class="eitag">author</span><span class="esymbol">:</span> <span class="estring">&quot;Larry Rix&quot;</span>
+	<span class="eitag">date</span><span class="esymbol">:</span> <span class="estring">&quot;$Date$&quot;</span>
+	<span class="eitag">revision</span><span class="esymbol">:</span> <span class="estring">&quot;$Revision$&quot;</span>
+
+<span class="ekeyword">class</span> <span class="ekeyword">interface</span>
+	<a class="eclass" href="../simple_env/simple_env_short.html">SIMPLE_ENV</a>
+
+<span class="ekeyword">create</span> 
+	<a class="efeature" href="../base/any_short.html#f_default_create">default_create</a>
+
+<span class="ekeyword">feature</span> <span class="ecomment">--</span><span class="ecomment"> Access</span>
+
+	<a name="f_get"></a><a class="efeature" href="../simple_env/simple_env_short.html#f_get">get</a> <span class="esymbol">(</span><span class="elocal">a_name</span><span class="esymbol">:</span> <a class="eclass" href="../base/readable_string_general_short.html">READABLE_STRING_GENERAL</a><span class="esymbol">)</span><span class="esymbol">:</span> <span class="ekeyword">detachable</span> <a class="eclass" href="../base/string_32_short.html">STRING_32</a>
+			<span class="ecomment">--</span><span class="ecomment"> Get value of environment variable </span><span class="equoted">a_name</span><span class="ecomment">.</span>
+			<span class="ecomment">--</span><span class="ecomment"> Returns Void if variable doesn't exist.</span>
+		<span class="ekeyword">require</span>
+			<span class="etag">name_not_empty</span><span class="esymbol">:</span> <a class="ekeyword" href="../base/boolean_short.html#f_negated">not</a> <span class="elocal">a_name</span><span class="edot">.</span><a class="efeature" href="../base/readable_string_general_short.html#f_is_empty">is_empty</a>
+
+	<a name="f_item"></a><a class="efeature" href="../simple_env/simple_env_short.html#f_item">item</a> <span class="ekeyword">alias</span> <span class="esymbol">&quot;</span><a class="esymbol" href="../simple_env/simple_env_short.html#f_item">[]</a><span class="esymbol">&quot;</span> <span class="esymbol">(</span><span class="elocal">a_name</span><span class="esymbol">:</span> <a class="eclass" href="../base/readable_string_general_short.html">READABLE_STRING_GENERAL</a><span class="esymbol">)</span><span class="esymbol">:</span> <span class="ekeyword">detachable</span> <a class="eclass" href="../base/string_32_short.html">STRING_32</a>
+			<span class="ecomment">--</span><span class="ecomment"> Shortcut for </span><span class="ecomment">`</span><a class="efeature" href="../simple_env/simple_env_short.html#f_get">get</a><span class="ecomment">`</span><span class="ecomment">.</span>
+		<span class="ekeyword">require</span>
+			<span class="etag">name_not_empty</span><span class="esymbol">:</span> <a class="ekeyword" href="../base/boolean_short.html#f_negated">not</a> <span class="elocal">a_name</span><span class="edot">.</span><a class="efeature" href="../base/readable_string_general_short.html#f_is_empty">is_empty</a>
+	
+<span class="ekeyword">feature</span> <span class="ecomment">--</span><span class="ecomment"> Status Report</span>
+
+	<a name="f_has"></a><a class="efeature" href="../simple_env/simple_env_short.html#f_has">has</a> <span class="esymbol">(</span><span class="elocal">a_name</span><span class="esymbol">:</span> <a class="eclass" href="../base/readable_string_general_short.html">READABLE_STRING_GENERAL</a><span class="esymbol">)</span><span class="esymbol">:</span> <a class="eclass" href="../base/boolean_short.html">BOOLEAN</a>
+			<span class="ecomment">--</span><span class="ecomment"> Does environment variable </span><span class="equoted">a_name</span><span class="ecomment"> exist?</span>
+		<span class="ekeyword">require</span>
+			<span class="etag">name_not_empty</span><span class="esymbol">:</span> <a class="ekeyword" href="../base/boolean_short.html#f_negated">not</a> <span class="elocal">a_name</span><span class="edot">.</span><a class="efeature" href="../base/readable_string_general_short.html#f_is_empty">is_empty</a>
+	
+<span class="ekeyword">feature</span> <span class="ecomment">--</span><span class="ecomment"> Modification</span>
+
+	<a name="f_set"></a><a class="efeature" href="../simple_env/simple_env_short.html#f_set">set</a> <span class="esymbol">(</span><span class="elocal">a_name</span><span class="esymbol">:</span> <a class="eclass" href="../base/readable_string_general_short.html">READABLE_STRING_GENERAL</a><span class="esymbol">;</span> <span class="elocal">a_value</span><span class="esymbol">:</span> <a class="eclass" href="../base/readable_string_general_short.html">READABLE_STRING_GENERAL</a><span class="esymbol">)</span>
+			<span class="ecomment">--</span><span class="ecomment"> Set environment variable </span><span class="equoted">a_name</span><span class="ecomment"> to </span><span class="equoted">a_value</span><span class="ecomment">.</span>
+		<span class="ekeyword">require</span>
+			<span class="etag">name_not_empty</span><span class="esymbol">:</span> <a class="ekeyword" href="../base/boolean_short.html#f_negated">not</a> <span class="elocal">a_name</span><span class="edot">.</span><a class="efeature" href="../base/readable_string_general_short.html#f_is_empty">is_empty</a>
+		<span class="ekeyword">ensure</span>
+			<span class="etag">variable_set</span><span class="esymbol">:</span> <a class="efeature" href="../simple_env/simple_env_short.html#f_last_operation_succeeded">last_operation_succeeded</a> <a class="ekeyword" href="../base/boolean_short.html#f_implication">implies</a> <span class="ekeyword">attached</span> <a class="efeature" href="../simple_env/simple_env_short.html#f_get">get</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="elocal">a_name</span><span class="esymbol">)</span>
+
+	<a name="f_put"></a><a class="efeature" href="../simple_env/simple_env_short.html#f_put">put</a> <span class="esymbol">(</span><span class="elocal">a_value</span><span class="esymbol">:</span> <a class="eclass" href="../base/readable_string_general_short.html">READABLE_STRING_GENERAL</a><span class="esymbol">;</span> <span class="elocal">a_name</span><span class="esymbol">:</span> <a class="eclass" href="../base/readable_string_general_short.html">READABLE_STRING_GENERAL</a><span class="esymbol">)</span>
+			<span class="ecomment">--</span><span class="ecomment"> Set environment variable </span><span class="equoted">a_name</span><span class="ecomment"> to </span><span class="equoted">a_value</span><span class="ecomment">.</span>
+			<span class="ecomment">--</span><span class="ecomment"> (Alternative signature matching HASH_TABLE convention)</span>
+		<span class="ekeyword">require</span>
+			<span class="etag">name_not_empty</span><span class="esymbol">:</span> <a class="ekeyword" href="../base/boolean_short.html#f_negated">not</a> <span class="elocal">a_name</span><span class="edot">.</span><a class="efeature" href="../base/readable_string_general_short.html#f_is_empty">is_empty</a>
+
+	<a name="f_unset"></a><a class="efeature" href="../simple_env/simple_env_short.html#f_unset">unset</a> <span class="esymbol">(</span><span class="elocal">a_name</span><span class="esymbol">:</span> <a class="eclass" href="../base/readable_string_general_short.html">READABLE_STRING_GENERAL</a><span class="esymbol">)</span>
+			<span class="ecomment">--</span><span class="ecomment"> Remove environment variable </span><span class="equoted">a_name</span><span class="ecomment">.</span>
+		<span class="ekeyword">require</span>
+			<span class="etag">name_not_empty</span><span class="esymbol">:</span> <a class="ekeyword" href="../base/boolean_short.html#f_negated">not</a> <span class="elocal">a_name</span><span class="edot">.</span><a class="efeature" href="../base/readable_string_general_short.html#f_is_empty">is_empty</a>
+		<span class="ekeyword">ensure</span>
+			<span class="etag">variable_removed</span><span class="esymbol">:</span> <a class="efeature" href="../simple_env/simple_env_short.html#f_last_operation_succeeded">last_operation_succeeded</a> <a class="ekeyword" href="../base/boolean_short.html#f_implication">implies</a> <a class="ekeyword" href="../base/boolean_short.html#f_negated">not</a> <a class="efeature" href="../simple_env/simple_env_short.html#f_has">has</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="elocal">a_name</span><span class="esymbol">)</span>
+	
+<span class="ekeyword">feature</span> <span class="ecomment">--</span><span class="ecomment"> Expansion</span>
+
+	<a name="f_expand"></a><a class="efeature" href="../simple_env/simple_env_short.html#f_expand">expand</a> <span class="esymbol">(</span><span class="elocal">a_string</span><span class="esymbol">:</span> <a class="eclass" href="../base/readable_string_general_short.html">READABLE_STRING_GENERAL</a><span class="esymbol">)</span><span class="esymbol">:</span> <a class="eclass" href="../base/string_32_short.html">STRING_32</a>
+			<span class="ecomment">--</span><span class="ecomment"> Expand environment variables in </span><span class="equoted">a_string</span><span class="ecomment">.</span>
+			<span class="ecomment">--</span><span class="ecomment"> E.g., &quot;%USERPROFILE%\Documents&quot; -&gt; &quot;C:\Users\John\Documents&quot;</span>
+		<span class="ekeyword">require</span>
+			<span class="etag">string_not_empty</span><span class="esymbol">:</span> <a class="ekeyword" href="../base/boolean_short.html#f_negated">not</a> <span class="elocal">a_string</span><span class="edot">.</span><a class="efeature" href="../base/readable_string_general_short.html#f_is_empty">is_empty</a>
+	
+<span class="ekeyword">feature</span> <span class="ecomment">--</span><span class="ecomment"> Status</span>
+
+	<a name="f_last_operation_succeeded"></a><a class="efeature" href="../simple_env/simple_env_short.html#f_last_operation_succeeded">last_operation_succeeded</a><span class="esymbol">:</span> <a class="eclass" href="../base/boolean_short.html">BOOLEAN</a>
+			<span class="ecomment">--</span><span class="ecomment"> Did the last set/unset operation succeed?</span>
+	
+<span class="ekeyword">end</span> <span class="ecomment">--</span> <span class="ecomment">class </span><a class="eclass" href="../simple_env/simple_env_short.html">SIMPLE_ENV</a></pre><form class="nav" onsubmit="go_to('../',this.c.value);return false;">
+<div class="nav">
+<a class="nav hierarchy" href="../class_list.html">Classes</a>
+<a class="nav hierarchy" href="../cluster_list.html">Clusters</a>
+<a class="nav hierarchy" href="../cluster_hierarchy.html">Cluster hierarchy</a>
+<a class="nav class" href="simple_env_chart.html">Chart</a>
+<a class="nav class" href="simple_env_links.html">Relations</a>
+<span class="nav class selected">Contracts</span>
+<span class="nav class goto">Go to: <input name="c" value="simple_env"></span>
+</div></form><pre></pre>
+<p style="text-align:center;">Generated by <a href="http://www.eiffel.com">ISE EiffelStudio</a></p>
+</body>
+</html>
+
