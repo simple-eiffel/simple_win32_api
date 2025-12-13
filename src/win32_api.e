@@ -59,7 +59,7 @@ feature -- Process Execution
 		require
 			command_not_empty: not a_command.is_empty
 		do
-			process_executor.execute (a_command)
+			process_executor.run (a_command)
 			if attached process_executor.last_output as l_output then
 				Result := l_output
 			else
@@ -74,7 +74,7 @@ feature -- Process Execution
 		local
 			l_output: STRING_32
 		do
-			process_executor.execute (a_command)
+			process_executor.run (a_command)
 			if attached process_executor.last_output as o then
 				l_output := o
 			else
