@@ -3,7 +3,7 @@ note
 	author: "Larry Rix"
 
 class
-	WIN32_API_TEST_APP
+	TEST_APP
 
 create
 	make
